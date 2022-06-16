@@ -3,6 +3,7 @@ package dev.nancygym.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -18,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        castView()
+    }
+        fun castView(){
         btnLogin = findViewById(R.id.btnLogin)
         tilEmail = findViewById(R.id.tilEmail)
         etEmail = findViewById(R.id.etEmail)
@@ -30,12 +34,17 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnLogin.setOnClickListener {
-            val intent = Intent(this,SignUpActivity::class.java)
+            var intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
-
-            validatelogin()
-
         }
+
+        validatelogin()
+            btnLogin.setOnClickListener {
+                startActivity(Intent(this,HomeActivity::class.java))
+
+            }
+
+
     }
 
         fun validatelogin() {
@@ -47,12 +56,18 @@ class LoginActivity : AppCompatActivity() {
                 tilEmail.error = "Email is required"
                 error = true
             }
+
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                tilEmail.error = "Not valid email address"
+                error = true
+            }
             var password = etpassword.text.toString()
             if (password.isBlank()) {
                 tilpassword.error = "Password is required"
                 error = true
             }
             if (error != true) {
+
             }
         }
     }
