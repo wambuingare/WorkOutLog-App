@@ -43,10 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this,HomeActivity::class.java))
 
             }
-
-
     }
-
         fun validatelogin() {
             var error = false
             tilEmail.error = null
