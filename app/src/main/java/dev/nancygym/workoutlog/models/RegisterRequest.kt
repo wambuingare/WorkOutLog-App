@@ -1,4 +1,4 @@
-package dev.nancygym.workoutlog.Models
+package dev.nancygym.workoutlog.models
 
 import com.google.gson.annotations.SerializedName
 

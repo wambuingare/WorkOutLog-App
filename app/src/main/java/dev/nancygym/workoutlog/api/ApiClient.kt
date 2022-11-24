@@ -1,16 +1,15 @@
 package dev.nancygym.workoutlog.api
 
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+object ApiClient {
+    val client = OkHttpClient.Builder()
+        .addInterceptor(ChuckerInterceptor(WorkoutLog.appContext))
+        .build()
+    var retrofit = Retrofit.Builder()
+        .baseUrl("http://192.81.215.35")
+        .addConverterFactory(GsonConverterFactory.create()).client(client)
+        .build()
 
-
-    object ApiClient {
-        var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.81.215.35")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        fun <T> buildApiClient(apiInterface: Class<T>): T {
-            return retrofit.create(apiInterface)
-        }
+    fun <T> buildApiClient(apiInterface: Class<T>): T {
+        return retrofit.create(apiInterface)
     }
-
+}
